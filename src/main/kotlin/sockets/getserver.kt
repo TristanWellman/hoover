@@ -10,7 +10,6 @@ class getserver {
 
         val scan: BufferedReader = BufferedReader(FileReader("user.config"));
         var server_ip: String = "";
-        var server_login_port: String = "";
         var server_port: String = "";
 
         while(true) {
@@ -20,8 +19,6 @@ class getserver {
                 server_ip = line;
             } else if(line.contains("SERVER_PORT=")) {
                 server_port = line;
-            } else if(line.contains("SERVER_LOGIN_PORT=")) {
-                server_login_port = line;
             }
         }
 
@@ -33,14 +30,10 @@ class getserver {
         val str2: String = st2.nextToken("~");
         val SERVER_PORT: String = st2.nextToken("~");
 
-        val st3: StringTokenizer = StringTokenizer(server_login_port);
-        val str3: String = st3.nextToken("~");
-        val SERVER_LOGIN_PORT: String = st3.nextToken("~");
 
         val arr: Array<String> = arrayOf(
             SERVER_IP,
             SERVER_PORT,
-            SERVER_LOGIN_PORT
         );
 
         return arr;

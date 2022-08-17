@@ -103,7 +103,7 @@ class hoover_user {
         val serverarr: Array<String> = getserver.server_and_port();
 
         val sock = sock();
-        sock.socket_sendfile(serverarr[0], serverarr[2], data_log);
+        sock.socket_sendfile(serverarr[0], serverarr[1], data_log);
 
         val success: Boolean = true;
         return success;

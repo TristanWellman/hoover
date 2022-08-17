@@ -42,7 +42,10 @@ class user {
             }  else if(UOS == "u") {
 
                 File("user.config").appendText("\n\nUOS=USER\n");
-                File("user.config").appendText("SERVER1=isbn-dining.at.playit.gg\nPORT1=28609");
+                File("user.config").appendText(
+                    "SERVER_IP=~isbn-dining.at.playit.gg~\n" +
+                            "SERVER_PORT=~28609~"
+                );
 
                 val hoover_user = hoover_user();
                 hoover_user.signup();

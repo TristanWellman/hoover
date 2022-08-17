@@ -54,7 +54,7 @@ class server_side {
             while(true) {
                 val line: String = scan.readLine() ?: break;
 
-                if(line.contains("SERVER_LOGIN_PORT=")) {
+                if(line.contains("SERVER_PORT=")) {
                     server_port = line;
                 }
             }
