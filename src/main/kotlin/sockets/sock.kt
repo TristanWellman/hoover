@@ -5,9 +5,11 @@ import java.net.Socket;
 
 class sock {
 
-    fun socket_sendfile(server: String, port: Int, file: File) {
+    fun socket_sendfile(server: String, port: String, file: File) {
 
-        val socket: Socket = Socket(server, port);
+        val PORT: Int = port.toInt();
+
+        val socket: Socket = Socket(server, PORT);
         val input: InputStream = FileInputStream(file);
         val output: OutputStream = DataOutputStream(socket.getOutputStream());
 
@@ -20,10 +22,5 @@ class sock {
         socket.close();
 
     }
-
-    public fun ret_fname() {
-
-    }
-
 
 }

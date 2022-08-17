@@ -8,6 +8,9 @@ import java.io.FileReader
 import java.util.*
 import javax.crypto.AEADBadTagException
 
+import sockets.getserver
+import sockets.sock
+
 class hoover_user {
 
     public val cal: Calendar = Calendar.getInstance();
@@ -62,37 +65,46 @@ class hoover_user {
 
         val st: StringTokenizer = StringTokenizer(encrypt2_line);
         val str1: String = st.nextToken("~");
-        println(str1);
+        //println(str1);
         val encrypt2: String = st.nextToken("~")
-        println(encrypt2);
+        //println(encrypt2);
 
         val st2: StringTokenizer = StringTokenizer(enckey3_line);
         val str2: String = st2.nextToken("~");
-        println(str2);
+        //println(str2);
         val enckey3: String = st2.nextToken("~");
-        println(enckey3);
+        //println(enckey3);
 
         val st3: StringTokenizer = StringTokenizer(enckey1_line);
         val str3: String = st3.nextToken("~");
-        println(str3);
+        //println(str3);
         val enckey1: String = st3.nextToken("~");
-        println(enckey1);
+        //println(enckey1);
 
-        val arr: Array<String> = arrayOf(key2, enckey1, key1, enckey3, encrypt2);
+        val arr: Array<String> = arrayOf(
+            key2,
+            enckey1,
+            key1,
+            enckey3,
+            encrypt2
+        );
 
-        val symencr = symenc();
+        File("data.log").appendText(
+                arr[0] + "\n" +
+                    arr[1] + "\n" +
+                        arr[2] + "\n" +
+                        arr[3] + "\n" +
+                        arr[4] + "\n"
+        );
 
-        try {
-            val exkey = symencr.decrypt(ciphText = arr[1], secret = arr[0]);
-            val key3 = symencr.decrypt(ciphText = arr[3], secret = arr[2]);
-            val encrypt = symencr.decrypt(ciphText = arr[4], secret = key3);
-            val input = symencr.decrypt(ciphText = encrypt, secret = exkey)
-            println(input);
-            /*val hoover = hoovercrypt();
-        hoover.hoover_decrypt(arr);*/
-        } catch(error: AEADBadTagException) {
-            println("\n$log" + "ERROR:: Tag Mismatch: $error\n");
-        }
+        val data_log: File = File("data.log");
+
+        val getserver = getserver();
+        val serverarr: Array<String> = getserver.server_and_port();
+
+        val sock = sock();
+        sock.socket_sendfile(serverarr[0], serverarr[2], data_log);
+
         val success: Boolean = true;
         return success;
     }

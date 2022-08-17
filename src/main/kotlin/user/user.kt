@@ -29,10 +29,13 @@ class user {
                 File("user.config").appendText("\n\nUOS=SERVER\nSERVER_TYPE=NORMAL\n");
                 println("Enter your servers Ip address: ");
                 val ip = readLine();
-                File("user.config").appendText("SERVER_IP=$ip\n");
+                File("user.config").appendText("SERVER_IP=~$ip~\n");
                 println("Enter the desired port for traffic: ");
                 val port = readLine();
-                File("user.config").appendText("SERVER_PORT=$port\n");
+                File("user.config").appendText("SERVER_PORT=~$port~\n");
+                println("Enter the desired port for login traffic: ");
+                val login_port = readLine();
+                File("user.config").appendText("SERVER_LOGIN_PORT=~$login_port~\n");
                 println("Finished server user config!\n");
                 val sock = server_side();
                 sock.server_main();
