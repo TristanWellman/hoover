@@ -6,6 +6,7 @@ import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
 import java.util.*
+import javax.crypto.AEADBadTagException
 
 class hoover_user {
 
@@ -81,14 +82,17 @@ class hoover_user {
 
         val symencr = symenc();
 
-        val exkey = symencr.decrypt(ciphText = arr[1], secret = arr[0]);
-        val key3 = symencr.decrypt(ciphText = arr[3], secret = arr[2]);
-        val encrypt = symencr.decrypt(ciphText = arr[4], secret = key3);
-        val input = symencr.decrypt(ciphText = encrypt, secret = exkey)
-        println(input);
-        /*val hoover = hoovercrypt();
+        try {
+            val exkey = symencr.decrypt(ciphText = arr[1], secret = arr[0]);
+            val key3 = symencr.decrypt(ciphText = arr[3], secret = arr[2]);
+            val encrypt = symencr.decrypt(ciphText = arr[4], secret = key3);
+            val input = symencr.decrypt(ciphText = encrypt, secret = exkey)
+            println(input);
+            /*val hoover = hoovercrypt();
         hoover.hoover_decrypt(arr);*/
-
+        } catch(error: AEADBadTagException) {
+            println("\n$log" + "ERROR:: Tag Mismatch: $error\n");
+        }
         val success: Boolean = true;
         return success;
     }
