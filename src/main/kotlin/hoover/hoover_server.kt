@@ -11,13 +11,13 @@ class hoover_server {
     val log = hoover_log();
 
     fun hoover_start() {
+        val hoover_reciever_thread = Thread {
+            val server = server_side();
+            server.server_logins();
+        }
         val hoover_socket_thread = Thread {
             val server = server_side();
             server.server_main();
-        }
-        val hoover_login_thread = Thread {
-            val server = server_side();
-
         }
         val choover_thread = Thread {
             Runtime.getRuntime().exec("./c_server");

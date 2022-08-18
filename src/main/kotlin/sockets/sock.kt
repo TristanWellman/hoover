@@ -23,4 +23,26 @@ class sock {
 
     }
 
+    fun socket_sendstring(server: String, port: String, input: String) {
+
+        val PORT = port.toInt();
+
+        val socket: Socket = Socket(server, PORT);
+
+        val dos: DataOutputStream = DataOutputStream(socket.getOutputStream());
+        dos.writeUTF(input );
+
+    }
+
+    fun socket_recievestring(server: String, port: String) {
+
+        val PORT = port.toInt();
+
+        val socket: Socket = Socket(server, PORT);
+        val output: DataInputStream = DataInputStream(socket.getInputStream());
+
+        val msg: String = output.readUTF();
+
+    }
+
 }

@@ -33,9 +33,6 @@ class user {
                 println("Enter the desired port for traffic: ");
                 val port = readLine();
                 File("user.config").appendText("SERVER_PORT=~$port~\n");
-                println("Enter the desired port for login traffic: ");
-                val login_port = readLine();
-                File("user.config").appendText("SERVER_LOGIN_PORT=~$login_port~\n");
                 println("Finished server user config!\n");
                 val sock = server_side();
                 sock.server_main();

