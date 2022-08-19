@@ -30,7 +30,7 @@ class sock {
         val socket: Socket = Socket(server, PORT);
 
         val dos: DataOutputStream = DataOutputStream(socket.getOutputStream());
-        dos.writeUTF(input );
+        dos.writeUTF(input);
 
     }
 

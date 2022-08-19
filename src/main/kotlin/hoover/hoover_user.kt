@@ -10,6 +10,7 @@ import javax.crypto.AEADBadTagException
 
 import sockets.getserver
 import sockets.sock
+import user.getuser
 
 class hoover_user {
 
@@ -39,7 +40,7 @@ class hoover_user {
         val hoover = hoovercrypt();
         val arr: Array<String> = hoover.hoover_encrypt_message_toData(pass);
         println(":: IMPORTANT :: THESE ARE YOUR PASSWORD KEYS, KEEP THEM IN A SAFE PLACE ::\n\nKEY1: " + arr[0] + "\nKEY2: " + arr[2] + "\n");
-        File("user.config").appendText("\nUSER_NAME=$uname\n");
+        File("user.config").appendText("\nUSER_NAME=~$uname~\n");
         File("user.config").appendText("\nPASSWORD=~" + arr[4] + "~\nENCKEY1=~" + arr[1] + "~\nENCKEY3=~" + arr[3] + "~\n");
         println("$log Finished hoover signup");
     }
@@ -110,10 +111,13 @@ class hoover_user {
 
         val getserver = getserver();
         val serverarr: Array<String> = getserver.server_and_port();
+        val getuser = getuser();
+        val username = getuser.username();
 
         val sock = sock();
         //sock.socket_sendfile(serverarr[0], serverarr[1], data_log);
         sock.socket_sendstring(serverarr[0], serverarr[1],
+            "LOGIN~" + username + "~" +
             arr[0] + "~" + arr[1] + "~" + arr[2] + "~" + arr[3] + "~" + arr[4]
         );
 

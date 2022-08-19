@@ -37,12 +37,39 @@ class server_side {
     }
 
     fun server_logins() {
+
         while(true) {
 
             val msg: String = server_recievestring();
-            File("logins.hoover").appendText(msg + "\n");
 
-            //Runtime.getRuntime().exec("./");
+            if(msg.contains("LOGIN~")) {
+
+                File("logins.log").appendText(msg + "\n");
+                val os = System.getProperty("os.name").lowercase();
+
+                when(os) {
+                    "win" -> Runtime.getRuntime().exec("hoover_cserver");
+                    else -> {
+                        Runtime.getRuntime().exec("./hoover_cserver logins.log");
+                    }
+                }
+                val success: File = File("logins.log");
+                val scan: BufferedReader = BufferedReader(FileReader("user.config"));
+                var suc: String = "";
+
+                while(true) {
+                    val line: String = scan.readLine() ?: break;
+
+                    if (line.contains("SUCCESS=TRUE")) {
+                        suc = line;
+                    } else if(line.contains("SUCCESS=false")) {
+
+                    }
+                }
+                scan.close();
+            } else {
+                continue;
+            }
 
         }
     }

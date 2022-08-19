@@ -3,6 +3,6 @@
 #include "files.h"
 
 int main(int argc, char *argv[]) {
-    file_manage();
+    file_manage(argc, argv);
     return 0;
 }

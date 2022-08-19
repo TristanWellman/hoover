@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <time.h>
 
-void file_manage() {
+void file_manage(int argc, char *argv[]) {
 
-    for(;;) {
         FILE *user_in = fopen("data.log", "rw");
         FILE *user_list = fopen("user_list.log", "rw");
+        FILE *login = fopen(logins.log);
 
         if(user_in != NULL) {
 
@@ -17,6 +17,5 @@ void file_manage() {
         }
         fclose(user_list);
         fclose(user_in);
-    }
 
 }
