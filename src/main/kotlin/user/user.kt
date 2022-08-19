@@ -43,8 +43,8 @@ class user {
                 val port2 = readLine();
                 File("user.config").appendText("SERVER_PORT2=~$port2~\n");
                 log.log_info("Finished server user config!\n");
-                val sock = server_side();
-                sock.server_main();
+                val sock = hoover_server();
+                sock.hoover_start();
             }  else if(UOS == "u") {
 
                 File("user.config").appendText("\n\nUOS=USER\n");
