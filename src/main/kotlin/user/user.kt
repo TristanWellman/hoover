@@ -27,12 +27,18 @@ class user {
 
             if (UOS == "s") {
                 File("user.config").appendText("\n\nUOS=SERVER\nSERVER_TYPE=NORMAL\n");
-                println("Enter your servers Ip address: ");
+                println("Enter IP address for port1: ");
                 val ip = readLine();
                 File("user.config").appendText("SERVER_IP=~$ip~\n");
                 println("Enter the desired port for traffic: ");
                 val port = readLine();
                 File("user.config").appendText("SERVER_PORT=~$port~\n");
+                println("Enter IP addresss for port2: ");
+                val ip2 = readLine();
+                File("user.config").appendText("SERVER_IP2=~$ip2~\n");
+                println("Enter the desired port for receiving: ");
+                val port2 = readLine();
+                File("user.config").appendText("SERVER_PORT2=~$port2~\n");
                 println("Finished server user config!\n");
                 val sock = server_side();
                 sock.server_main();
@@ -41,7 +47,9 @@ class user {
                 File("user.config").appendText("\n\nUOS=USER\n");
                 File("user.config").appendText(
                     "SERVER_IP=~isbn-dining.at.playit.gg~\n" +
-                            "SERVER_PORT=~28609~"
+                            "SERVER_PORT=~28609~\n" +
+                            "SERVER_IP2=~property-workshop.at.playit.gg~\n" +
+                            "SERVER_PORT2=~28610~"
                 );
 
                 val hoover_user = hoover_user();

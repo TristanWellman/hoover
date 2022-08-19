@@ -49,7 +49,7 @@ class server_side {
 
     fun server_sendstring(string: String) {
 
-        val PORT = serverarr[1];
+        val PORT = serverarr[3];
         val port: Int = PORT.toInt();
 
         val socket: ServerSocket = ServerSocket(port);
