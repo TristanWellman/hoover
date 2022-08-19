@@ -116,10 +116,12 @@ class hoover_user {
 
         val sock = sock();
         //sock.socket_sendfile(serverarr[0], serverarr[1], data_log);
-        sock.socket_sendstring(serverarr[0], serverarr[1],
+        sock.socket_sendstring(serverarr[2], serverarr[3],
             "LOGIN~" + username + "~" +
             arr[0] + "~" + arr[1] + "~" + arr[2] + "~" + arr[3] + "~" + arr[4]
         );
+
+        sock.socket_recievestring(serverarr[0], serverarr[1]);
 
         val success: Boolean = true;
         return success;

@@ -1,5 +1,6 @@
 package sockets
 
+import log.hoover_log
 import java.net.ServerSocket
 import java.net.Socket
 
@@ -11,6 +12,7 @@ class server_side {
 
     public val getserver = getserver();
     public val serverarr: Array<String> = getserver.server_and_port();
+    public val log = hoover_log();
 
     fun server_main() {
         while(true) {
@@ -50,7 +52,7 @@ class server_side {
                 when(os) {
                     "win" -> Runtime.getRuntime().exec("hoover_cserver");
                     else -> {
-                        Runtime.getRuntime().exec("./hoover_cserver logins.log");
+                        Runtime.getRuntime().exec("./hoover_cserver");
                     }
                 }
                 val success: File = File("logins.log");
@@ -63,7 +65,8 @@ class server_side {
                     if (line.contains("SUCCESS=TRUE")) {
                         suc = line;
                     } else if(line.contains("SUCCESS=false")) {
-
+                        log.log_warning("User tried to login and did not succeed!");
+                        continue;
                     }
                 }
                 scan.close();

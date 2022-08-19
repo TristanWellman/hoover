@@ -26,6 +26,8 @@ class hoover_server {
         log.log_info("started server_socket thread: " + hoover_socket_thread.name);
         choover_thread.start();
         log.log_info("started c_server thread: " + choover_thread.name);
+        hoover_reciever_thread.start();
+        log.log_info("started hoover reciever thread: " + hoover_reciever_thread.name);
     }
 
 }

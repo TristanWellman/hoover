@@ -1,21 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
 void file_manage(int argc, char *argv[]) {
 
-        FILE *user_in = fopen("data.log", "rw");
-        FILE *user_list = fopen("user_list.log", "rw");
-        FILE *login = fopen(logins.log);
+        FILE *login = fopen("logins.log", "rw");
 
-        if(user_in != NULL) {
+        if(login != NULL) {
+            char line[256];
+            int line_num;
+            while(fgets(line, sizeof(line), login) != NULL) {
+                char search[] = "~";
+                char *uname = strstr(line, search);
+                if(uname != NULL) {
+                    uname++;
+                }
 
-        } else if(user_list != NULL) {
+                const char delim[] = "~";
+                char *UNAME = strtok(uname, delim);
 
-        } else if(user_in == NULL && user_list == NULL) {
-            continue;
+                char buf[0x100];
+                UNAME[sizeof(uname)-1] = '\0';
+                snprintf(buf, sizeof(buf), "user/%s.login", UNAME);
+                FILE *done = fopen(buf, "a");
+                fprintf(done, "UNAME=~%s~\nLOGIN_SUCCESS=true", UNAME);
+                fclose(done);
+            }
         }
-        fclose(user_list);
-        fclose(user_in);
-
+        fclose(login);
 }
