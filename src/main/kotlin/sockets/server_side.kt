@@ -40,7 +40,7 @@ class server_side {
         while(true) {
 
             val msg: String = server_recievestring();
-            File("logins.hver").appendText(msg);
+            File("logins.hoover").appendText(msg + "\n");
 
             //Runtime.getRuntime().exec("./");
 
@@ -49,7 +49,7 @@ class server_side {
 
     fun server_sendstring(string: String) {
 
-        val PORT = serverarr[3];
+        val PORT = serverarr[1];
         val port: Int = PORT.toInt();
 
         val socket: ServerSocket = ServerSocket(port);
@@ -61,7 +61,7 @@ class server_side {
 
     fun server_recievestring(): String {
 
-        val PORT = serverarr[1];
+        val PORT = serverarr[3];
         val port: Int = PORT.toInt();
 
         val socket: ServerSocket = ServerSocket(port);

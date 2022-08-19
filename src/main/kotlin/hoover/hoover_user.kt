@@ -19,6 +19,15 @@ class hoover_user {
 
     fun hoover_start() {
 
+        val recieve_thread = Thread {
+            val sock = sock();
+            val server = getserver();
+            val serverarr: Array<String> = server.server_and_port();
+            while(true) {
+                val run = sock.socket_recievestring(serverarr[2], serverarr[3]);
+            }
+        }
+
     }
 
     fun signup() {

@@ -3,6 +3,7 @@ package user
 import encrypt.hoovercrypt
 import hoover.hoover_server
 import hoover.hoover_user
+import log.hoover_log
 import sockets.server_side
 import sockets.sock
 import java.io.File
@@ -10,6 +11,8 @@ import java.io.FileInputStream
 import java.util.Scanner
 
 class user {
+
+    val log = hoover_log();
 
     public fun user_init() {
 
@@ -30,16 +33,16 @@ class user {
                 println("Enter IP address for port1: ");
                 val ip = readLine();
                 File("user.config").appendText("SERVER_IP=~$ip~\n");
-                println("Enter the desired port for traffic: ");
+                log.log_info("Enter the desired port for traffic: ");
                 val port = readLine();
                 File("user.config").appendText("SERVER_PORT=~$port~\n");
-                println("Enter IP addresss for port2: ");
+                log.log_info("Enter IP addresss for port2: ");
                 val ip2 = readLine();
                 File("user.config").appendText("SERVER_IP2=~$ip2~\n");
-                println("Enter the desired port for receiving: ");
+                log.log_info("Enter the desired port for receiving: ");
                 val port2 = readLine();
                 File("user.config").appendText("SERVER_PORT2=~$port2~\n");
-                println("Finished server user config!\n");
+                log.log_info("Finished server user config!\n");
                 val sock = server_side();
                 sock.server_main();
             }  else if(UOS == "u") {
