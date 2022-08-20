@@ -22,8 +22,8 @@ class hoover_server {
         /*val choover_thread = Thread {
             Runtime.getRuntime().exec("./c_server");
         }*/
-        hoover_socket_thread.start();
-        log.log_info("started server_socket thread: " + hoover_socket_thread.name);
+        //hoover_socket_thread.start();
+        //log.log_info("started server_socket thread: " + hoover_socket_thread.name);
         /*choover_thread.start();
         log.log_info("started c_server thread: " + choover_thread.name);*/
         hoover_reciever_thread.start();
