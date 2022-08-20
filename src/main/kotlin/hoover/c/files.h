@@ -2,5 +2,6 @@
 #define FILES_H
 
 void file_manage();
+int signup_manage();
 
 #endif

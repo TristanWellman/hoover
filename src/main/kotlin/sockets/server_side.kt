@@ -1,5 +1,6 @@
 package sockets
 
+import encrypt.hoovercrypt
 import log.hoover_log
 import java.net.ServerSocket
 import java.net.Socket
@@ -38,7 +39,31 @@ class server_side {
         }
     }
 
-    fun server_signups() {
+    fun server_signups(signup: String) {
+        File("signups.log").appendText(signup + "\n");
+        val os = System.getProperty("os.name").lowercase();
+
+        /*when(os) {
+            "win" -> Runtime.getRuntime().exec("c_server.exe signup");
+            else -> {
+                Runtime.getRuntime().exec("./c_server signup");
+            }
+        }*/
+
+        val st: StringTokenizer = StringTokenizer(signup);
+        val delim: String = "~";
+        st.nextToken(delim);
+        val uname: String = st.nextToken(delim);
+        val encrypt2: String = st.nextToken(delim);
+        val enckey1: String = st.nextToken(delim);
+        val enckey3: String = st.nextToken(delim);
+
+        File("user/" + uname + ".user").appendText(
+            "USER_NAME=~" + uname + "~\n" +
+                    "ENCRYPT2=~" + encrypt2 + "~\n" +
+                    "ENCKEY1=~" + enckey1 + "~\n" +
+                    "ENCKEY3" + enckey3 + "~\n"
+        );
 
     }
 
@@ -53,18 +78,18 @@ class server_side {
                 File("logins.log").appendText(msg + "\n");
                 val os = System.getProperty("os.name").lowercase();
 
-                when(os) {
-                    "win" -> Runtime.getRuntime().exec("c_server.exe");
+                /*when(os) {
+                    "win" -> Runtime.getRuntime().exec("c_server.exe login");
                     else -> {
-                        Runtime.getRuntime().exec("./c_server");
+                        Runtime.getRuntime().exec("./c_server login");
                     }
-                }
+                }*/
 
                 val st: StringTokenizer = StringTokenizer(msg);
                 val str1: String = st.nextToken("~");
                 val uname: String = st.nextToken("~")
 
-                val success: File = File("user/" + uname + ".login");
+                val success: File = File("user/" + uname + ".user");
                 val scan: BufferedReader = BufferedReader(FileReader(success));
                 var key1: String = "";
                 var key2: String = "";
@@ -75,21 +100,25 @@ class server_side {
                 while(true) {
                     val line: String = scan.readLine() ?: break;
 
-                    if (line.contains("KEY1~")) {
-                        key1 = line;
-                    } else if(line.contains("KEY2~")) {
-                        key2 = line
+                    if (line.contains("ENCKEY1=")) {
+                        enckey1 = line;
+                    } else if(line.contains("ENCKEY3=")) {
+                        enckey3 = line
+                    } else if(line.contains("ENCRYPT2=")) {
+                        encrypt2 = line;
                     }
                 }
-                /*if(suc.contains("SUCCESS=TRUE")) {
-                    server_sendstring("true");
-                } else {
-                    server_sendstring("false");
-                    continue;
-                }*/
                 scan.close();
+
+                key1 = st.nextToken("~");
+                key2 = st.nextToken("~");
+
+                val crypt = hoovercrypt();
+                val arr: Array<String> = arrayOf(key1, enckey1, key2, enckey3, encrypt2);
+                crypt.hoover_decrypt(arr);
+
             } else if(msg.contains("SIGNUP~")) {
-                server_signups();
+                server_signups(msg);
             } else {
                 continue;
             }

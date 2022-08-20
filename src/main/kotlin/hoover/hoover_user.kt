@@ -100,7 +100,7 @@ class hoover_user {
         val enckey1: String = st3.nextToken("~");
         //println(enckey1);
 
-        val arr: Array<String> = arrayOf(
+        val arr: Array<String> = arrayOf( //4 1 3
             key2,
             enckey1,
             key1,
