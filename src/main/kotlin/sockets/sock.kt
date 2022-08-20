@@ -25,7 +25,10 @@ class sock {
 
     fun socket_sendstring(server: String, port: String, input: String) {
 
+        println("$port" + "\n" + "$server");
+
         val PORT = port.toInt();
+
 
         val socket: Socket = Socket(server, PORT);
 

@@ -36,13 +36,13 @@ class getserver {
         val str2: String = st2.nextToken("~");
         val SERVER_PORT: String = st2.nextToken("~");
 
-        val st3: StringTokenizer = StringTokenizer(server_port);
+        val st3: StringTokenizer = StringTokenizer(server_ip2);
         val str3: String = st3.nextToken("~");
-        val SERVER_PORT2: String = st3.nextToken("~");
+        val SERVER_IP2: String = st3.nextToken("~");
 
-        val st4: StringTokenizer = StringTokenizer(server_port);
+        val st4: StringTokenizer = StringTokenizer(server_port2);
         val str4: String = st4.nextToken("~");
-        val SERVER_IP2: String = st4.nextToken("~");
+        val SERVER_PORT2: String = st4.nextToken("~");
 
         val arr: Array<String> = arrayOf(
             SERVER_IP,

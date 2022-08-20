@@ -100,6 +100,9 @@ class server_side {
         val output: DataInputStream = DataInputStream(server.getInputStream())
         val msg: String = output.readUTF();
 
+        output.close();
+        server.close();
+
         return msg;
 
     }
