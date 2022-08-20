@@ -24,7 +24,7 @@ void file_manage(int argc, char *argv[]) {
                 UNAME[sizeof(uname)-1] = '\0';
                 snprintf(buf, sizeof(buf), "user/%s.login", UNAME);
                 FILE *done = fopen(buf, "a");
-                fprintf(done, "UNAME=~%s~\nLOGIN_SUCCESS=true", UNAME);
+                fprintf(done, "LOGIN~%s~\nLOGIN_SUCCESS=true", UNAME);
                 fclose(done);
             }
         }

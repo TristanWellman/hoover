@@ -38,6 +38,10 @@ class server_side {
         }
     }
 
+    fun server_signups() {
+
+    }
+
     fun server_logins() {
 
         while(true) {
@@ -55,27 +59,37 @@ class server_side {
                         Runtime.getRuntime().exec("./c_server");
                     }
                 }
-                val success: File = File("logins.log");
-                val scan: BufferedReader = BufferedReader(FileReader("user.config"));
-                var suc: String = "";
+
+                val st: StringTokenizer = StringTokenizer(msg);
+                val str1: String = st.nextToken("~");
+                val uname: String = st.nextToken("~")
+
+                val success: File = File("user/" + uname + ".login");
+                val scan: BufferedReader = BufferedReader(FileReader(success));
+                var key1: String = "";
+                var key2: String = "";
+                var enckey1: String = "";
+                var enckey3: String = "";
+                var encrypt2: String = "";
 
                 while(true) {
                     val line: String = scan.readLine() ?: break;
 
-                    if (line.contains("SUCCESS=TRUE")) {
-                        suc = line;
-                    } else if(line.contains("SUCCESS=false")) {
-                        log.log_warning("User tried to login and did not succeed!");
-                        break;
+                    if (line.contains("KEY1~")) {
+                        key1 = line;
+                    } else if(line.contains("KEY2~")) {
+                        key2 = line
                     }
                 }
-                if(suc.contains("SUCCESS=TRUE")) {
+                /*if(suc.contains("SUCCESS=TRUE")) {
                     server_sendstring("true");
                 } else {
                     server_sendstring("false");
                     continue;
-                }
+                }*/
                 scan.close();
+            } else if(msg.contains("SIGNUP~")) {
+                server_signups();
             } else {
                 continue;
             }
