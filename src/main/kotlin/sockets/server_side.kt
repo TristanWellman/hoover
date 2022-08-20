@@ -90,6 +90,7 @@ class server_side {
                 val uname: String = st.nextToken("~")
 
                 val success: File = File("user/" + uname + ".user");
+                success.createNewFile();
                 val scan: BufferedReader = BufferedReader(FileReader(success));
                 var key1: String = "";
                 var key2: String = "";

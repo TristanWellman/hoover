@@ -130,10 +130,10 @@ class hoover_user {
             arr[2] + "~" + arr[0] + "~"
         );
 
-        val msg: String = sock.socket_recievestring(serverarr[0], serverarr[1]);
-        val mes = msg.toBoolean();
+        //val msg: String = sock.socket_recievestring(serverarr[0], serverarr[1]);
+        //val mes = msg.toBoolean();
 
-        return mes;
+        return true;
     }
 
 }
