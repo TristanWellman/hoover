@@ -25,7 +25,7 @@ class sock {
 
     fun socket_sendstring(server: String, port: String, input: String) {
 
-        println("$port" + "\n" + "$server");
+        //println("$port" + "\n" + "$server");
 
         val PORT = port.toInt();
 
@@ -37,7 +37,7 @@ class sock {
 
     }
 
-    fun socket_recievestring(server: String, port: String) {
+    fun socket_recievestring(server: String, port: String): String {
 
         val PORT = port.toInt();
 
@@ -45,6 +45,11 @@ class sock {
         val output: DataInputStream = DataInputStream(socket.getInputStream());
 
         val msg: String = output.readUTF();
+
+        output.close();
+        socket.close();
+
+        return msg;
 
     }
 

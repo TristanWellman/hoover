@@ -92,9 +92,14 @@ class user {
                 hoover.hoover_start();
             } else if(scann == "UOS=USER") {
                 val hoover = hoover_user();
-                val success: Boolean = hoover.login();
-                if(success == true) {
-                    hoover.hoover_start();
+                while(true) {
+                    val success: Boolean = hoover.login();
+                    if (success == true) {
+                        hoover.hoover_start();
+                    } else if (success == false) {
+                        log.log_error("Failed to login, try again.\n");
+                        continue;
+                    }
                 }
             }
         }

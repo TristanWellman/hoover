@@ -50,9 +50,9 @@ class server_side {
                 val os = System.getProperty("os.name").lowercase();
 
                 when(os) {
-                    "win" -> Runtime.getRuntime().exec("hoover_cserver");
+                    "win" -> Runtime.getRuntime().exec("c_server.exe");
                     else -> {
-                        Runtime.getRuntime().exec("./hoover_cserver");
+                        Runtime.getRuntime().exec("./c_server");
                     }
                 }
                 val success: File = File("logins.log");
@@ -66,8 +66,14 @@ class server_side {
                         suc = line;
                     } else if(line.contains("SUCCESS=false")) {
                         log.log_warning("User tried to login and did not succeed!");
-                        continue;
+                        break;
                     }
+                }
+                if(suc.contains("SUCCESS=TRUE")) {
+                    server_sendstring("true");
+                } else {
+                    server_sendstring("false");
+                    continue;
                 }
                 scan.close();
             } else {
