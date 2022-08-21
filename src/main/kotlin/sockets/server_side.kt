@@ -58,7 +58,9 @@ class server_side {
         val enckey1: String = st.nextToken(delim);
         val enckey3: String = st.nextToken(delim);
 
-        File("user/" + uname + ".user").appendText(
+        val file: File = File("user/" + uname + ".user");
+        file.createNewFile();
+        file.appendText(
             "USER_NAME=~" + uname + "~\n" +
                     "ENCRYPT2=~" + encrypt2 + "~\n" +
                     "ENCKEY1=~" + enckey1 + "~\n" +
@@ -90,7 +92,6 @@ class server_side {
                 val uname: String = st.nextToken("~")
 
                 val success: File = File("user/" + uname + ".user");
-                success.createNewFile();
                 val scan: BufferedReader = BufferedReader(FileReader(success));
                 var key1: String = "";
                 var key2: String = "";
@@ -115,7 +116,7 @@ class server_side {
                 key2 = st.nextToken("~");
 
                 val crypt = hoovercrypt();
-                val arr: Array<String> = arrayOf(key1, enckey1, key2, enckey3, encrypt2);
+                val arr = arrayOf(key1, enckey1, key2, enckey3, encrypt2);
                 crypt.hoover_decrypt(arr);
 
             } else if(msg.contains("SIGNUP~")) {
@@ -129,7 +130,7 @@ class server_side {
 
     fun server_sendstring(string: String) {
 
-        val PORT = serverarr[1];
+        val PORT = serverarr[3];
         val port: Int = PORT.toInt();
 
         val socket: ServerSocket = ServerSocket(port);
@@ -141,7 +142,7 @@ class server_side {
 
     fun server_recievestring(): String {
 
-        val PORT = serverarr[3];
+        val PORT = serverarr[1];
         val port: Int = PORT.toInt();
 
         val socket: ServerSocket = ServerSocket(port);

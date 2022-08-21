@@ -35,9 +35,13 @@ class sock {
         val dos: DataOutputStream = DataOutputStream(socket.getOutputStream());
         dos.writeUTF(input);
 
+        socket.close();
+        dos.close();
+
     }
 
-    fun socket_recievestring(server: String, port: String): String {
+
+    fun socket_recievestring(server: String, port: String) {
 
         val PORT = port.toInt();
 
@@ -45,11 +49,6 @@ class sock {
         val output: DataInputStream = DataInputStream(socket.getInputStream());
 
         val msg: String = output.readUTF();
-
-        output.close();
-        socket.close();
-
-        return msg;
 
     }
 
